@@ -1,0 +1,9 @@
+Checks: >-
+  -*,
+  bugprone-empty-catch,
+  bugprone-exception-escape,
+  clang-analyzer-cplusplus.StringChecker,
+  performance-unnecessary-value-param
+HeaderFilterRegex: '^(include|src|test)/'
+FormatStyle: file
+WarningsAsErrors: '*'

@@ -1,0 +1,14 @@
+<launch>
+  <node pkg="yp_spur_ros2" exec="yp_spur_node" name="yp_spur_node" output="screen">
+    <param name="device" value="/dev/your_device" />
+    <param name="parameter_file" value="~/your_path_to/yp_robot.params" />
+    <param name="baudrate" value="115200" />
+    <param name="cmd_vel_timeout" value="0.5" />
+    <param name="odom_publish_rate" value="30.0" />
+    <param name="max_linear_velocity" value="1.0" />
+    <param name="max_angular_velocity" value="2.0" />
+    <param name="publish_tf" value="true" />
+    <param name="odom_frame" value="odom" />
+    <param name="base_frame" value="base_link" />
+  </node>
+</launch>

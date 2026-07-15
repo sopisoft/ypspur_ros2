@@ -1,0 +1,16 @@
+exclude: ^vendor/
+repos:
+  - repo: local
+    hooks:
+      - id: clang-format
+        name: clang-format
+        entry: pixi run fmt
+        language: system
+        pass_filenames: false
+        files: ^(include|src|test)/.*\.(c|cpp|h)$
+      - id: clang-tidy
+        name: clang-tidy
+        entry: pixi run lint
+        language: system
+        pass_filenames: false
+        files: ^(include|src|test)/.*\.(c|cpp|h)$

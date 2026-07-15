@@ -1,0 +1,4 @@
+[submodule "vendor/yp-spur"]
+	path = vendor/yp-spur
+	url = git@github.com:sopisoft/yp-spur.git
+	branch = ypc-ros2-develop
