@@ -1,5 +1,5 @@
-#ifndef YP_SPUR_ROS2_COORDINATOR_ADAPTER_INTERNAL_H
-#define YP_SPUR_ROS2_COORDINATOR_ADAPTER_INTERNAL_H
+#ifndef YPSPUR_ROS2_COORDINATOR_ADAPTER_INTERNAL_H
+#define YPSPUR_ROS2_COORDINATOR_ADAPTER_INTERNAL_H
 
 #include <pthread.h>
 #include <stddef.h>
@@ -8,7 +8,7 @@
 #include <ypspur/command.h>
 #include <ypspur/odometry.h>
 
-#include <yp_spur_ros2/coordinator_adapter.h>
+#include <ypspur_ros2/coordinator_adapter.h>
 
 typedef struct {
   pthread_t control_thread;
@@ -41,4 +41,4 @@ int start_threads(void);
 void stop_motors(void);
 void join_threads(void);
 
-#endif // YP_SPUR_ROS2_COORDINATOR_ADAPTER_INTERNAL_H
+#endif // YPSPUR_ROS2_COORDINATOR_ADAPTER_INTERNAL_H

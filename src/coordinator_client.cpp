@@ -1,8 +1,8 @@
 #include <string>
 
-#include <yp_spur_ros2/coordinator_client.h>
+#include <ypspur_ros2/coordinator_client.h>
 
-namespace yp_spur_ros2
+namespace ypspur_ros2
 {
 
 bool CApiCoordinatorClient::start(const YpscRos2Config &config, std::string &error)
@@ -38,4 +38,4 @@ bool CApiCoordinatorClient::is_connected() const
   return ypsc_ros2_is_connected() != 0;
 }
 
-} // namespace yp_spur_ros2
+} // namespace ypspur_ros2

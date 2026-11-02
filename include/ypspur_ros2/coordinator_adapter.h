@@ -1,5 +1,5 @@
-#ifndef YP_SPUR_ROS2_COORDINATOR_ADAPTER_H
-#define YP_SPUR_ROS2_COORDINATOR_ADAPTER_H
+#ifndef ypspur_ros2_COORDINATOR_ADAPTER_H
+#define ypspur_ros2_COORDINATOR_ADAPTER_H
 
 #include <stdint.h>
 
@@ -35,4 +35,4 @@ const char *ypsc_ros2_last_error(void);
 }
 #endif // __cplusplus
 
-#endif // YP_SPUR_ROS2_COORDINATOR_ADAPTER_H
+#endif // ypspur_ros2_COORDINATOR_ADAPTER_H

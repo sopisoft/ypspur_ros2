@@ -1,9 +1,11 @@
-#ifndef YP_SPUR_ROS2_NODE_CONTROLLER_H
-#define YP_SPUR_ROS2_NODE_CONTROLLER_H
+#ifndef ypspur_ros2_NODE_CONTROLLER_H
+#define ypspur_ros2_NODE_CONTROLLER_H
 
 #include <chrono>
+#include <cstdint>
 #include <memory>
 #include <mutex>
+#include <optional>
 #include <string>
 
 #include <geometry_msgs/msg/transform_stamped.hpp>
@@ -12,10 +14,10 @@
 #include <rclcpp/rclcpp.hpp>
 #include <tf2_ros/transform_broadcaster.h>
 
-#include <yp_spur_ros2/coordinator_client.h>
-#include <yp_spur_ros2/node_util.h>
+#include <ypspur_ros2/coordinator_client.h>
+#include <ypspur_ros2/node_util.h>
 
-namespace yp_spur_ros2
+namespace ypspur_ros2
 {
 
 class NodeController
@@ -52,6 +54,7 @@ private:
   std::chrono::steady_clock::time_point last_command_time_ = std::chrono::steady_clock::now();
   bool timed_out_ = false;
   bool stopped_ = false;
+  std::optional<uint64_t> last_odometry_sequence_;
   rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr odom_pub_;
   rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_sub_;
   rclcpp::TimerBase::SharedPtr odom_timer_;
@@ -59,6 +62,6 @@ private:
   std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
 };
 
-} // namespace yp_spur_ros2
+} // namespace ypspur_ros2
 
-#endif // YP_SPUR_ROS2_NODE_CONTROLLER_H
+#endif // ypspur_ros2_NODE_CONTROLLER_H

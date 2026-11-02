@@ -1,11 +1,11 @@
-#include "yp_spur_ros2/node_util.h"
+#include "ypspur_ros2/node_util.h"
 
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
 #include <filesystem>
 
-namespace yp_spur_ros2
+namespace ypspur_ros2
 {
 
 namespace
@@ -80,4 +80,4 @@ std::string resolve_parameter_file_path(const std::string &parameter_file)
   return expanded_path.string();
 }
 
-} // namespace yp_spur_ros2
+} // namespace ypspur_ros2
