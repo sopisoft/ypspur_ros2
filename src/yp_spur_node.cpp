@@ -4,12 +4,12 @@
 
 #include <rclcpp/rclcpp.hpp>
 
-#include <yp_spur_ros2/node_controller.h>
+#include <ypspur_ros2/node_controller.h>
 
 namespace
 {
 
-yp_spur_ros2::NodeController::Config read_config(rclcpp::Node &node)
+ypspur_ros2::NodeController::Config read_config(rclcpp::Node &node)
 {
   node.declare_parameter<std::string>("device", "");
   node.declare_parameter<std::string>("parameter_file", "");
@@ -22,7 +22,7 @@ yp_spur_ros2::NodeController::Config read_config(rclcpp::Node &node)
   node.declare_parameter<std::string>("odom_frame", "odom");
   node.declare_parameter<std::string>("base_frame", "base_link");
 
-  yp_spur_ros2::NodeController::Config config;
+  ypspur_ros2::NodeController::Config config;
   config.device = node.get_parameter("device").as_string();
   config.parameter_file = node.get_parameter("parameter_file").as_string();
   config.baudrate = static_cast<int>(node.get_parameter("baudrate").as_int());
@@ -44,9 +44,9 @@ int main(int argc, char **argv)
 
   try {
     auto node = std::make_shared<rclcpp::Node>("yp_spur_node");
-    yp_spur_ros2::CApiCoordinatorClient client;
+    ypspur_ros2::CApiCoordinatorClient client;
     auto config = read_config(*node);
-    auto controller = std::make_shared<yp_spur_ros2::NodeController>(*node, client, config);
+    auto controller = std::make_shared<ypspur_ros2::NodeController>(*node, client, config);
     rclcpp::spin(node);
     controller.reset();
   } catch (const std::exception &e) {

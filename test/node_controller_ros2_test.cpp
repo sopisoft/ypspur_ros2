@@ -12,12 +12,12 @@
 #include <rclcpp/executors/single_threaded_executor.hpp>
 #include <rclcpp/rclcpp.hpp>
 
-#include <yp_spur_ros2/node_controller.h>
+#include <ypspur_ros2/node_controller.h>
 
 namespace
 {
 
-class FakeCoordinatorClient final : public yp_spur_ros2::CoordinatorClient
+class FakeCoordinatorClient final : public ypspur_ros2::CoordinatorClient
 {
 public:
   bool start(const YpscRos2Config &config, std::string &error) override
@@ -98,10 +98,10 @@ int main(int argc, char **argv)
 
   FakeCoordinatorClient client;
 
-  yp_spur_ros2::NodeController::Config invalid_config;
+  ypspur_ros2::NodeController::Config invalid_config;
   bool rejected_missing_params = false;
   try {
-    yp_spur_ros2::NodeController invalid_controller(*controller_node, client, invalid_config, false);
+    ypspur_ros2::NodeController invalid_controller(*controller_node, client, invalid_config, false);
     (void)invalid_controller;
   } catch (const std::exception &) {
     rejected_missing_params = true;
@@ -111,7 +111,7 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  yp_spur_ros2::NodeController::Config config;
+  ypspur_ros2::NodeController::Config config;
   config.device = "/dev/ttyUSB0";
   config.parameter_file = "/tmp/robot.param";
   config.baudrate = 115200;
@@ -122,7 +122,7 @@ int main(int argc, char **argv)
   config.odom_frame = "odom";
   config.base_frame = "base_link";
 
-  auto controller = std::make_unique<yp_spur_ros2::NodeController>(*controller_node, client, config, false);
+  auto controller = std::make_unique<ypspur_ros2::NodeController>(*controller_node, client, config, false);
   if (!client.started || !client.connected) {
     std::cerr << "controller should start the coordinator client\n";
     return 1;
@@ -154,8 +154,10 @@ int main(int argc, char **argv)
 
   std::promise<nav_msgs::msg::Odometry> odom_promise;
   auto odom_future = odom_promise.get_future();
+  int odom_messages = 0;
   auto odom_sub = listener_node->create_subscription<nav_msgs::msg::Odometry>(
-    "odom", 10, [&odom_promise](const nav_msgs::msg::Odometry &msg) {
+    "odom", 10, [&odom_promise, &odom_messages](const nav_msgs::msg::Odometry &msg) {
+      ++odom_messages;
       try {
         odom_promise.set_value(msg);
       } catch (const std::future_error &) {
@@ -193,6 +195,13 @@ int main(int argc, char **argv)
       std::fabs(odom_msg.twist.twist.linear.x - client.snapshot.linear_velocity) > 1e-9 ||
       std::fabs(odom_msg.twist.twist.angular.z - client.snapshot.angular_velocity) > 1e-9) {
     std::cerr << "odometry values should match the coordinator snapshot\n";
+    return 1;
+  }
+
+  controller->publish_odometry();
+  executor->spin_some();
+  if (odom_messages != 1) {
+    std::cerr << "unchanged odometry should not be republished\n";
     return 1;
   }
 

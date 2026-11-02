@@ -1,11 +1,11 @@
-#ifndef YP_SPUR_ROS2_COORDINATOR_CLIENT_H
-#define YP_SPUR_ROS2_COORDINATOR_CLIENT_H
+#ifndef ypspur_ros2_COORDINATOR_CLIENT_H
+#define ypspur_ros2_COORDINATOR_CLIENT_H
 
 #include <string>
 
-#include <yp_spur_ros2/coordinator_adapter.h>
+#include <ypspur_ros2/coordinator_adapter.h>
 
-namespace yp_spur_ros2
+namespace ypspur_ros2
 {
 
 class CoordinatorClient
@@ -30,6 +30,6 @@ public:
   bool is_connected() const override;
 };
 
-} // namespace yp_spur_ros2
+} // namespace ypspur_ros2
 
-#endif // YP_SPUR_ROS2_COORDINATOR_CLIENT_H
+#endif // ypspur_ros2_COORDINATOR_CLIENT_H

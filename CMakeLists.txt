@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8...3.28)
 
-project(yp_spur_ros2 VERSION 0.1.0 LANGUAGES C CXX)
+project(ypspur_ros2 VERSION 0.1.0 LANGUAGES C CXX)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 

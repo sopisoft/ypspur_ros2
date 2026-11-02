@@ -1,4 +1,4 @@
-# yp_spur_ros2
+# ypspur_ros2
 
 ROS2 wrapper for ypspur-coordinator
 

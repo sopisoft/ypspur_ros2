@@ -11,9 +11,9 @@
 #include <rclcpp/rclcpp.hpp>
 #include <tf2_ros/transform_broadcaster.h>
 
-#include <yp_spur_ros2/node_controller.h>
+#include <ypspur_ros2/node_controller.h>
 
-namespace yp_spur_ros2
+namespace ypspur_ros2
 {
 
 NodeController::NodeController(rclcpp::Node &node, CoordinatorClient &client, const Config &config, bool enable_timers)
@@ -109,9 +109,10 @@ void NodeController::handle_timeout()
 void NodeController::publish_odometry()
 {
   YpscRos2Odometry odom{};
-  if (!client_.get_odometry(odom) || !odom.valid) {
+  if (!client_.get_odometry(odom) || !odom.valid || odom.sequence == last_odometry_sequence_) {
     return;
   }
+  last_odometry_sequence_ = odom.sequence;
 
   nav_msgs::msg::Odometry msg;
   msg.header.stamp = node_.now();
@@ -151,4 +152,4 @@ void NodeController::send_velocity(double linear, double angular)
   }
 }
 
-} // namespace yp_spur_ros2
+} // namespace ypspur_ros2

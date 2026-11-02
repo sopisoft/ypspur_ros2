@@ -1,12 +1,12 @@
-#ifndef YP_SPUR_ROS2_NODE_UTIL_H
-#define YP_SPUR_ROS2_NODE_UTIL_H
+#ifndef ypspur_ros2_NODE_UTIL_H
+#define ypspur_ros2_NODE_UTIL_H
 
 #include <chrono>
 #include <string>
 
 #include <geometry_msgs/msg/quaternion.hpp>
 
-namespace yp_spur_ros2
+namespace ypspur_ros2
 {
 
 struct VelocityCommand {
@@ -21,6 +21,6 @@ bool is_command_timed_out(std::chrono::steady_clock::time_point last_command_tim
                           std::chrono::steady_clock::duration timeout, std::chrono::steady_clock::time_point now);
 std::string resolve_parameter_file_path(const std::string &parameter_file);
 
-} // namespace yp_spur_ros2
+} // namespace ypspur_ros2
 
-#endif // YP_SPUR_ROS2_NODE_UTIL_H
+#endif // ypspur_ros2_NODE_UTIL_H
